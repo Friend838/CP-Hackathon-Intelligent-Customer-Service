@@ -1,0 +1,65 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  hackthon
+
+  Sample SAM Template for hackthon
+
+Globals:
+    Function:
+        Handler: lambda_function.lambda_handler
+        Runtime: python3.9
+        Timeout: 60
+
+Resources:
+    Dispatcher:
+        Type: AWS::Serverless::Function
+        Properties:
+            CodeUri: Dispatcher/
+            FunctionName: team16_hackthon_dispatcher
+            Role: arn:aws:iam::591886860315:role/amplify-cp111065508-dev-191719-authRole-idp
+            Architectures:
+                - x86_64
+            Environment:
+                Variables:
+                    Register_Product: team16_hackthon_product_registration
+                    RequestRMA: team16_hackthon_RMA_request
+                    QueryProductWarranty: team16_hackthon_warranty_query
+                    QueryRMAHistory: team16_hackthon_RMA_query
+
+    
+    Registration:
+        Type: AWS::Serverless::Function
+        Properties:
+            CodeUri: ProductRegistration/
+            FunctionName: team16_hackthon_product_registration
+            Role: arn:aws:iam::591886860315:role/amplify-cp111065508-dev-191719-authRole-idp
+            Architectures:
+                - x86_64
+
+    RequestRMA:
+        Type: AWS::Serverless::Function
+        Properties:
+            CodeUri: RequestRMA/
+            FunctionName: team16_hackthon_RMA_request
+            Role: arn:aws:iam::591886860315:role/amplify-cp111065508-dev-191719-authRole-idp
+            Architectures:
+                - x86_64
+
+    QueryProductWarranty:
+        Type: AWS::Serverless::Function
+        Properties:
+            CodeUri: QueryProductWarranty/
+            FunctionName: team16_hackthon_warranty_query
+            Role: arn:aws:iam::591886860315:role/amplify-cp111065508-dev-191719-authRole-idp
+            Architectures:
+                - x86_64
+    
+    QueryRMA:
+        Type: AWS::Serverless::Function
+        Properties:
+            CodeUri: QueryRMAStatus/
+            FunctionName: team16_hackthon_RMA_query
+            Role: arn:aws:iam::591886860315:role/amplify-cp111065508-dev-191719-authRole-idp
+            Architectures:
+                - x86_64
